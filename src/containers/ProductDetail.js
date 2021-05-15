@@ -12,6 +12,7 @@ function ProductDetail() {
   let product = useSelector((state) => state.product);
   const { image, title, price, category, description } = product;
   const dispatch = useDispatch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchProductDetail = async (id) => {
     const response = await axios
       .get(`https://fakestoreapi.com/products/${id}`)
@@ -26,7 +27,7 @@ function ProductDetail() {
     return () => {
       dispatch(removeSelectedProduct());
     };
-  }, [productId]);
+  }, [dispatch, fetchProductDetail, productId]);
   return (
     <div className="ui grid container">
       {Object.keys(product).length === 0 ? (
@@ -42,6 +43,7 @@ function ProductDetail() {
               <div className="column rp">
                 <h1>{title}</h1>
                 <h2>
+                  {/* eslint-disable-next-line jsx-a11y/anchor-is-valid  */}
                   <a className="ui teal tag label" alt="check">
                     ${price}
                   </a>
